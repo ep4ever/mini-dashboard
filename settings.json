@@ -1,0 +1,75 @@
+{
+  "sources": [
+    {
+      "name": "maindb",
+      "type": "mysql",
+      "dbuser": "solardb",
+      "dbpwd": "ifbsn44.",
+      "dbhost": "callisto.local",
+      "dbname": "solardb"
+    }
+  ],
+  "queries": [
+    {
+      "name": "dashboard",
+      "query": "SELECT * FROM dashboard_view",
+      "source": "maindb"
+    },
+    {
+      "name": "watts",
+      "query": "WITH curr_watts AS(SELECT d.name, dt.value FROM device d JOIN data dt ON dt.device_id = d.id JOIN field f ON f.id = dt.field_id WHERE d.name IN('6420an', '3210an1', '3210an2') AND dt.`date` >= NOW() - INTERVAL 1 DAY AND f.name  = 'rated_watt' ORDER by dt.id DESC LIMIT 3) SELECT 'watts', ROUND(SUM(value), 2) AS value from curr_watts",
+      "source": "maindb"
+    }
+  ],
+  "fields": [
+    {
+      "label": "SOC",
+      "field": "batt_soc",
+      "format": "percentage",
+      "suffix": "",
+      "source": "dashboard"
+    },
+    {
+      "label": "Voltage",
+      "field": "batt_voltage",
+      "format": "number",
+      "suffix": "V",
+      "source": "dashboard"
+    },
+    {
+      "label": "Load",
+      "field": "load",
+      "format": "number",
+      "suffix": "W",
+      "source": "dashboard"
+    },
+    {
+      "label": "Temp",
+      "field": "temperature",
+      "format": "number",
+      "suffix": "°C",
+      "source": "dashboard"
+    },
+    {
+      "label": "ETG0",
+      "field": "hv_active_power",
+      "format": "number",
+      "suffix": "W",
+      "source": "dashboard"
+    },
+    {
+      "label": "ETG1",
+      "field": "hv_active_power_etg1",
+      "format": "number",
+      "suffix": "W",
+      "source": "dashboard"
+    },
+    {
+      "label": "Solar",
+      "field": "watts",
+      "format": "number",
+      "suffix": "W",
+      "source": "watts"
+    }
+  ]
+}
