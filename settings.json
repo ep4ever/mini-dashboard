@@ -4,8 +4,8 @@
       "name": "maindb",
       "type": "mysql",
       "dbuser": "solardb",
-      "dbpwd": "ifbsn44.",
-      "dbhost": "callisto.local",
+      "dbpwd": "<dbpassword>",
+      "dbhost": "<dbIP>",
       "dbname": "solardb"
     }
   ],

@@ -44,7 +44,7 @@ class Dashboard:
         win.configure(bg='')
         win.attributes('-topmost', True)
         win.resizable(width=False, height=False)
-        win.iconphoto(False, PhotoImage(file="icon.png"))
+        # win.iconphoto(False, PhotoImage(file="icon.png"))
         win.title('Dashboard')
         win.rowconfigure(fieldcount, minsize=8)
         win.columnconfigure([0, 1], minsize=60)
